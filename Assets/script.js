@@ -55,9 +55,9 @@ var city = cityCoords.name
 //currentDay is for 1 day; name, date, imgIcon, temp, humidity, wind into a card
     function currentDay(weather, city) {
         console.log(weather, city)
-        var day = document.getElementById('.currentDay').
-        day.textContent= 'test'
-     
+        var day = document.getElementById('currentDay')
+        day.textContent= city
+        
         //create variables that rep the data
         var temp= weather.temp
         var humidity= weather.humidity
@@ -70,9 +70,15 @@ var card = document.createElement('div')
 var cardBody = document.createElement('div')
         // cardBody.setAttribute.add('card-body')
 var cardText = document.createElement('p')
-    cardText.textContent= temp 
-    cardText.textContent= humidity
-    cardText.textContent= wind
+        var tempEL = document.getElementById('temp')
+        tempEL.textContent= temp
+        var humidEL = document.getElementById('humid') 
+        humidEL.textContent= humidity
+        var windEl = document.getElementById('wind')
+        windEl.textContent= wind
+    // cardText.textContent= temp 
+    // cardText.textContent= humidity
+    // cardText.textContent= wind
   
 
         cardBody.appendChild(cardText);  
