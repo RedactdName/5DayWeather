@@ -55,26 +55,29 @@ var city = cityCoords.name
 //currentDay is for 1 day; name, date, imgIcon, temp, humidity, wind into a card
     function currentDay(weather, city) {
         console.log(weather, city)
+        var day = document.getElementById('.currentDay').
+        day.textContent= 'test'
+     
         //create variables that rep the data
         var temp= weather.temp
         var humidity= weather.humidity
         var wind = weather.wind
-    console.log(temp, humidity)
+    console.log(temp, humidity, wind)
 
     //create the card (line 26 in html)
 var card = document.createElement('div')
         card.classList.add('card')
-var cardBody = document.createElement('card-body')
+var cardBody = document.createElement('div')
         // cardBody.setAttribute.add('card-body')
 var cardText = document.createElement('p')
-        // cardText.setAttribute.add('Temp')
-        // cardText.setAttribute.add('Humidity')
-        // cardText.setAttribute.add('Wind')
-        
-        cardBody.append(cardText);  
-        card.append(cardBody);
+    cardText.textContent= temp 
+    cardText.textContent= humidity
+    cardText.textContent= wind
+  
 
-        console.log(card.cardBody)
+        cardBody.appendChild(cardText);  
+        card.appendChild(cardBody);
+        day.appendChild(card);
         
         
 
@@ -82,7 +85,7 @@ var cardText = document.createElement('p')
     }
 
 //forecast is for 5 days; date, imgIcon, temp, humidity, wind into 5 cards
-// for (let i = 0; i < array.length; i++) {
+// for (let i = 0; i < forecast.length; i++) {
 //     const element = array[i];
     
 // }
@@ -98,6 +101,7 @@ var cardText = document.createElement('p')
 // Special Functions
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
+//Add city to search history (localStorage)
 // if (localStorage.getItem("cities")) {
 // 	storedCities = JSON.parse(localStorage.getItem("cities"));
 // 	console.log(storedCities);
@@ -112,6 +116,7 @@ var cardText = document.createElement('p')
 // console.log("cities", cities);
 
 // // Busniess logic
+//button to enter (eventListener)
 searchBtn.addEventListener("click", clickHandler);
 
 
@@ -119,14 +124,12 @@ searchBtn.addEventListener("click", clickHandler);
 
 //Open webpage
     //see search bar to enter city
-    //button to enter (eventListener)
 //After entering city get results of weather for next 5 days
     //Use of API info
     // https://api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
     
     //city name , date, temperature, humidity, windspeed appear as text
     //image of current weather conditions
- //Add city to search history (localStorage)
  //Create search history bar/aside
     //displays previous cities search for
     //links to present their data again if clicked)   
