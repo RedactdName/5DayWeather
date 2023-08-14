@@ -58,11 +58,23 @@ var city = cityCoords.name
         //create variables that rep the data
         var temp= weather.temp
         var humidity= weather.humidity
+        var wind = weather.wind
     console.log(temp, humidity)
 
     //create the card (line 26 in html)
 var card = document.createElement('div')
         card.classList.add('card')
+var cardBody = document.createElement('card-body')
+        // cardBody.setAttribute.add('card-body')
+var cardText = document.createElement('p')
+        // cardText.setAttribute.add('Temp')
+        // cardText.setAttribute.add('Humidity')
+        // cardText.setAttribute.add('Wind')
+        
+        cardBody.append(cardText);  
+        card.append(cardBody);
+
+        console.log(card.cardBody)
         
         
 
