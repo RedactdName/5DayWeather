@@ -47,7 +47,7 @@ var city = cityCoords.name
     .then(function(data){
         console.log(data)
         currentDay(data.list[0].main, city)
-        forecast(data.list)
+        forecastCard(data.list)
   
 
     })
@@ -56,45 +56,104 @@ var city = cityCoords.name
     function currentDay(weather, city) {
         console.log(weather, city)
         var day = document.getElementById('currentDay')
-        day.textContent= city
+        // day.textContent= city
         
         //create variables that rep the data
+        var date = weather.dt_txt
         var temp= weather.temp
         var humidity= weather.humidity
         var wind = weather.wind
-    console.log(temp, humidity, wind)
+        var img = weather.icon
+        
+    console.log(date, temp, humidity, wind)
 
-    //create the card (line 26 in html)
+    //create the card 
 var card = document.createElement('div')
         card.classList.add('card')
-var cardBody = document.createElement('div')
-        // cardBody.setAttribute.add('card-body')
-var cardText = document.createElement('p')
-        var tempEL = document.getElementById('temp')
-        tempEL.textContent= temp
-        var humidEL = document.getElementById('humid') 
-        humidEL.textContent= humidity
-        var windEl = document.getElementById('wind')
-        windEl.textContent= wind
-    // cardText.textContent= temp 
-    // cardText.textContent= humidity
-    // cardText.textContent= wind
-  
-
-        cardBody.appendChild(cardText);  
+        //creating the city title
+var title = document.createElement('h3')
+    title.setAttribute('class', "card-title")
+    title.textContent = city     
+    // creating the card body that includes the data   
+    var cardBody = document.createElement('div')
+    cardBody.setAttribute('class',"card-body")
+    
+        //creating the <p> that hold the data
+var dateEL = document.createElement('p')
+        dateEL.setAttribute('class', "card-date") 
+        dateEL.textContent = `date: ${date}`
+var tempEL = document.createElement('p')
+    tempEL.setAttribute('class',"card-text")
+        tempEL.textContent= `temp: ${temp}`
+var imgEL = document.createElement('p')
+        imgEL.setAttribute('class',"card-text")
+            imgEL.textContent= ` ${img}`
+var humidEL = document.createElement('p')
+    humidEL.setAttribute('class',"card-text")
+        humidEL.textContent= `humidity: ${humidity}`
+        var windEL = document.createElement('p')
+    windEL.setAttribute('class',"card-text")
+        windEL.textContent= `wind: ${wind}`
+        //appending title to the card
+        card.appendChild(title)
+        // appending card body into card
         card.appendChild(cardBody);
+        //appending card to day
         day.appendChild(card);
+        //appending all <p> to card body
+        cardBody.append(dateEL, tempEL, imgEL, humidEL, windEL);  
         
         
 
 // display the data to the card, then need to append
     }
 
-//forecast is for 5 days; date, imgIcon, temp, humidity, wind into 5 cards
-// for (let i = 0; i < forecast.length; i++) {
-//     const element = array[i];
+//forecast is for 5 days; date, temp, img, humidity, wind into 5 cards
+function forecastCard(forecast) {
+    console.log(forecast)
+    var cardContainer = document.getElementById('5DayCard')
+
+    for (let i = 0; i < forecast.length; i++) {
+        const weather = forecast[i];
+            // create variables that rep the data
+            var date = weather.dt_txt
+            var temp= weather.main.temp
+            var humidity= weather.main.humidity
+            var wind = weather.wind.speed
+            var img = weather.icon
+        console.log(date, temp, humidity, wind, img)
     
-// }
+//create the card 
+    var card = document.createElement('div')
+            card.classList.add('card')
+ // creating the card body that includes the data   
+    var cardBody = document.createElement('div')
+            cardBody.setAttribute('class',"card-body")
+ //creating the <p> that hold the data
+    var dateEL = document.createElement('p')
+        dateEL.setAttribute('class', "card-date") 
+            dateEL.textContent = `date: ${date}`
+    var tempEL = document.createElement('p')
+        tempEL.setAttribute('class',"card-text")
+            tempEL.textContent= `temp: ${temp}`
+    var imgEL = document.createElement('p')
+        imgEL.setAttribute('class',"card-text")
+            imgEL.textContent= ` ${img}`
+    var humidEL = document.createElement('p')
+        humidEL.setAttribute('class',"card-text")
+            humidEL.textContent= `humidity: ${humidity}`
+    var windEL = document.createElement('p')
+        windEL.setAttribute('class',"card-text")
+            windEL.textContent= `wind: ${wind}`
+           
+            // appending card body into card
+            card.appendChild(cardBody);
+            //appending card to day
+            cardContainer.appendChild(card);
+            //appending all <p> to card body
+            cardBody.append(dateEL, tempEL, imgEL, humidEL, windEL);  
+    }
+}
 // WHEN I search for a city
 // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
 
