@@ -113,7 +113,7 @@ function forecastCard(forecast) {
     console.log(forecast)
     var cardContainer = document.getElementById('5DayCard')
 
-    for (let i = 0; i < forecast.length; i++) {
+    for (let i = 0; i < 5; i++) {
         const weather = forecast[i];
             // create variables that rep the data
             var date = weather.dt_txt
