@@ -2,6 +2,8 @@ console.log("JS is loaded");
 // Variables
 const  citySearch = document.getElementById("citySearch")
 const searchBtn = document.getElementById("searchBtn")
+const historyBtn = document.getElementById("history-btn")
+let searchHistory = []
 var keyID = 'bd264bda2339694f1d8b05eeddb26285'
 
 let weatherSearch = 'https://api.openweathermap.org/data/2.5/forecast?q='+ citySearch +'&appid='+ keyID
@@ -14,6 +16,33 @@ function clickHandler(e) {
     getGeo(userInput)
 
 }
+function savedHistory(userInput) {
+    searchHistory.push(userInput)
+    localStorage.setItem("cityHistory", JSON.stringify(searchHistory))
+    printHistory()
+}
+function printHistory() {
+    for (let i = searchHistory.length -1 ; i >= 0; i--) {
+       var btn = document.createElement('button')
+       btn.setAttribute('type', 'button')
+       btn.setAttribute('class', 'btn-history')
+       btn.setAttribute('data-search', searchHistory[i])
+        btn.textContent = searchHistory[i]
+        historyBtn.append(btn)
+    }
+//historyBtn event.target 
+//redefine value to userInput & go to getGeo   
+//if I click btn-history 
+//if  I take value  
+}
+function initHistory() {
+    var searched = localStorage.getItem('cityHistory')
+    if (searched) {
+        searchHistory = JSON.parse(searched)  
+    } 
+    printHistory()
+}
+initHistory()
 //Next fucntion use the user input for the GEO API
 function getGeo(userInput) {
     var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=5&appid=${keyID}`
@@ -25,6 +54,9 @@ function getGeo(userInput) {
     })
     .then(function(data){
         console.log(data)
+    savedHistory(userInput)    
+    
+
     cityForecast(data[0])
 
     })

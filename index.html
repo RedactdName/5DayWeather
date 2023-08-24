@@ -8,15 +8,16 @@
     <title>5 Day Weather</title>
 </head>
 <body>
-    <Header>
-        <h1>Weather Dashboard</h1>
+    <Header class="container-fluid justify-content-center bg-primary">
+        <h1 class="row">Weather Dashboard</h1>
     </Header>
-    <div class="container">
-        <div class="row">
+    <main class="container">
+        <div> class="row">
             <div class="col-md-3 col-sm-12">
              <h2>City Search</h2> 
                 <input type="text" id="citySearch">
                 <button class="btn btn-danger" id="searchBtn" type="button">Search</button>
+                <div id="history-btn"></div>
             </div>
             <div class="col-md-9 col-sm-12">
                 
@@ -42,7 +43,7 @@
             </div>
             </div>
         </div>
-    </div>
+    </main>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> -->
     <script src="Assets/script.js"></script>
 </body>
