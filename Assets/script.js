@@ -22,6 +22,7 @@ function savedHistory(userInput) {
     printHistory()
 }
 function printHistory() {
+    historyBtn.textContent = ""
     for (let i = searchHistory.length -1 ; i >= 0; i--) {
        var btn = document.createElement('button')
        btn.setAttribute('type', 'button')
@@ -69,7 +70,7 @@ function cityForecast(cityCoords) {
 var {lat ,lon } = cityCoords
 var city = cityCoords.name
     //fetch
-    var apiURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keyID}`
+    var apiURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keyID}&units=imperial`
     
 
     fetch(apiURL)
@@ -78,24 +79,25 @@ var city = cityCoords.name
     })
     .then(function(data){
         console.log(data)
-        currentDay(data.list[0].main, city)
+        currentDay(data.list[0].main, city, data.list[0].weather[0].icon)
         forecastCard(data.list)
   
 
     })
 }
 //currentDay is for 1 day; name, date, imgIcon, temp, humidity, wind into a card
-    function currentDay(weather, city) {
+    function currentDay(weather, city, icon) {
         console.log(weather, city)
         var day = document.getElementById('currentDay')
         // day.textContent= city
         
         //create variables that rep the data
-        var date = weather.dt_txt
+        var date = new Date()
+        var today = date.toLocaleDateString()
         var temp= weather.temp
         var humidity= weather.humidity
         var wind = weather.wind
-        var img = weather.icon
+        var img = icon
         
     console.log(date, temp, humidity, wind)
 
@@ -113,13 +115,12 @@ var title = document.createElement('h3')
         //creating the <p> that hold the data
 var dateEL = document.createElement('p')
         dateEL.setAttribute('class', "card-date") 
-        dateEL.textContent = `date: ${date}`
+        dateEL.textContent = `date: ${today}`
 var tempEL = document.createElement('p')
     tempEL.setAttribute('class',"card-text")
         tempEL.textContent= `temp: ${temp}`
-var imgEL = document.createElement('p')
-        imgEL.setAttribute('class',"card-text")
-            imgEL.textContent= ` ${img}`
+var imgEL = document.createElement('img')
+        imgEL.setAttribute('src',`https://openweathermap.org/img/wn/${img}.png`)    
 var humidEL = document.createElement('p')
     humidEL.setAttribute('class',"card-text")
         humidEL.textContent= `humidity: ${humidity}`
@@ -152,7 +153,7 @@ function forecastCard(forecast) {
             var temp= weather.main.temp
             var humidity= weather.main.humidity
             var wind = weather.wind.speed
-            var img = weather.icon
+            var img = weather.weather[0].icon
         console.log(date, temp, humidity, wind, img)
     
 //create the card 
@@ -168,9 +169,8 @@ function forecastCard(forecast) {
     var tempEL = document.createElement('p')
         tempEL.setAttribute('class',"card-text")
             tempEL.textContent= `temp: ${temp}`
-    var imgEL = document.createElement('p')
-        imgEL.setAttribute('class',"card-text")
-            imgEL.textContent= ` ${img}`
+    var imgEL = document.createElement('img')
+        imgEL.setAttribute('src',`https://openweathermap.org/img/wn/${img}.png`)
     var humidEL = document.createElement('p')
         humidEL.setAttribute('class',"card-text")
             humidEL.textContent= `humidity: ${humidity}`
